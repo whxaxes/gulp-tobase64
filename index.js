@@ -5,7 +5,7 @@ var fs = require("fs");
 module.exports = function (options) {
     var opt = {
         maxsize: 1,  //小于该值的图片将会被编译为base64，单位为kb
-        filter: null,  //用于过滤部分不想编译的图片名
+        ignore: null,  //用于过滤部分不想编译的图片名
         pathrep: null  //将路由地址的图片路径替换成相对地址,格式为{reg:'',rep:''}
     }
     var URL_REG = /("|'|\()(\/?[^"'()]*\/)*?[^."'()]*?\.(png|jpg|gif)(\?[^?]*)?("|'|\))/g;
@@ -16,31 +16,29 @@ module.exports = function (options) {
     }
 
     var imgPath, i, ref;
-    var filter = opt.filter,
+    var ignore = opt.ignore,
         maxsize = typeof +opt.maxsize === "number" ? +opt.maxsize : 1,
         pathrep = typeof opt.pathrep === "object" ? opt.pathrep : null;
     var _transform = function (file, encoding, done) {
         var str = String(file.contents);
         var p = file.path.substring(0, file.path.lastIndexOf("\\"));
 
-        var publicReg = /\/public\/bizapp\d*\//g;
-
         str = str.replace(URL_REG, function (m) {
-            //判断filter的值并进行相应处理
-            if(filter){
-                if (typeof filter === "string") {
-                    if (m.indexOf(filter) >= 0) return m
-                } else if ('splice' in filter) {
+            //判断ignore的值并进行相应处理
+            if(ignore){
+                if (typeof ignore === "string") {
+                    if (m.indexOf(ignore) >= 0) return m
+                } else if ('splice' in ignore) {
                     ref = false;
-                    for (i = 0; i < filter.length; i++) {
-                        if(typeof filter[i] === "string" && m.indexOf(filter[i]) >= 0){
+                    for (i = 0; i < ignore.length; i++) {
+                        if(typeof ignore[i] === "string" && m.indexOf(ignore[i]) >= 0){
                             ref = true;
                             break;
                         }
                     }
                     if(ref) return m;
-                }else if(filter instanceof RegExp){
-                    if(m.match(filter)) return m;
+                }else if(ignore instanceof RegExp){
+                    if(m.match(ignore)) return m;
                 }
             }
 
@@ -60,7 +58,7 @@ module.exports = function (options) {
             try {
                 var stats = fs.statSync(imgPath);
                 //如果图片文件小于1kb则替换为base64格式
-                if (stats.size / 1024 < opt.maxsize) {
+                if (stats.size / 1024 < maxsize) {
                     var baseStr = fs.readFileSync(imgPath).toString("base64");
                     imgPath = q + "data:image/" + fk + ";base64," + baseStr + h;
                     //console.log(file.path)
