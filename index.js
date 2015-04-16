@@ -54,7 +54,6 @@ module.exports = function (options) {
             }else {
                 imgPath = path.resolve(p, imgPath);
             }
-
             try {
                 var stats = fs.statSync(imgPath);
                 //如果图片文件小于1kb则替换为base64格式
@@ -65,7 +64,9 @@ module.exports = function (options) {
                     //console.log(m +" ==> [length:"+imgPath.length+"]" + imgPath.substring(0 , 50) + "..." + imgPath.substring(imgPath.length-10 , imgPath.length))
                     return imgPath;
                 }
-            } catch (e) {}
+            } catch (e) {
+                //console.log(e)
+            }
 
             return m;
         });

@@ -1,0 +1,9 @@
+.img1{
+    background-image: url(../images/img_1.png);
+}
+.img2{
+    background-image: url("../images/img_2.png");
+}
+.img3{
+    background-image: url("../images/img_3.png");
+}
