@@ -4,7 +4,8 @@ image to base64
 自用插件，可以将css、html中的图片转成base64格式
 
 ##Use
-
+    npm install gulp-tobase64
+    
     var tobase64 = require("gulp-tobase64");
     tobase64(options);
 
