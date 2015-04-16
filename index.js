@@ -7,12 +7,12 @@ module.exports = function (options) {
         maxsize: 1,  //小于该值的图片将会被编译为base64，单位为kb
         ignore: null,  //用于过滤部分不想编译的图片名
         pathrep: null  //将路由地址的图片路径替换成相对地址,格式为{reg:'',rep:''}
-    }
+    };
     var URL_REG = /("|'|\()(\/?[^"'()]*\/)*?[^."'()]*?\.(png|jpg|gif)(\?[^?]*)?("|'|\))/g;
 
     for (var k in options) {
         if (!(k in opt)) continue;
-        opt[k] = options[k]
+        opt[k] = options[k];
     }
 
     var imgPath, i, ref;
@@ -72,7 +72,7 @@ module.exports = function (options) {
 
         file.contents = new Buffer(str);
         done(null , file);
-    }
+    };
 
     return through.obj(_transform)
 }
