@@ -1,6 +1,7 @@
 var through = require("through2");
 var path = require("path");
 var fs = require("fs");
+var URL_REG = /("|'|\()(\/?[^"'()]*\/)*?[^."'()]*?\.(png|jpg|gif)(\?[^?]*)?("|'|\))/g;
 
 module.exports = function (options) {
     var opt = {
@@ -8,7 +9,6 @@ module.exports = function (options) {
         ignore: null,  //用于过滤部分不想编译的图片名
         pathrep: null  //将路由地址的图片路径替换成相对地址,格式为{reg:'',rep:''}
     };
-    var URL_REG = /("|'|\()(\/?[^"'()]*\/)*?[^."'()]*?\.(png|jpg|gif)(\?[^?]*)?("|'|\))/g;
 
     for (var k in options) {
         if (!(k in opt)) continue;
