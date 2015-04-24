@@ -1,6 +1,6 @@
 {
   "name": "gulp-tobase64",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "image to base64",
   "main": "index.js",
   "dependencies": {
@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "wanghx",
-  "license": "ISC",
+  "license": "MIT",
   "directories": {
     "test": "test"
   },
