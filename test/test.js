@@ -1,3 +1,4 @@
+//常规测试
 var tobase64 = require("../");
 var vfs = require("vinyl-fs");
 

@@ -1,9 +1,7 @@
-"use strict";
-
 var through = require("through2");
 var path = require("path");
 var fs = require("fs");
-var URL_REG = /("|'|\()(\/?[^"'()]*\/)*?[^."'()]*?\.(png|jpg|gif)(\?[^?]*)?("|'|\))/g;
+var URL_REG = /("|'|\()(\/?([\w.-]|\.|\.\.)*\/)*?[\w-]*?\.(?:png|jpg|gif|bmp)(\?[\w=]*)?("|'|\))/g;
 
 module.exports = function (options) {
     var opt = {
@@ -74,6 +72,7 @@ module.exports = function (options) {
         });
 
         file.contents = new Buffer(str);
+
         done(null , file);
     };
 
