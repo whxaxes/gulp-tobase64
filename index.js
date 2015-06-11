@@ -1,7 +1,7 @@
 var through = require("through2");
 var path = require("path");
 var fs = require("fs");
-var URL_REG = /("|'|\()(\/?([\w.-]|\.|\.\.)*\/)*?[\w-]*?\.(?:png|jpg|gif|bmp)(\?[\w=]*)?("|'|\))/g;
+var URL_REG = /(?:"|'|\()(?:\/?([\w.-]|\.|\.\.)*\/)*?[\w-]*?\.(?:png|jpg|gif|bmp)(?:\?[\w=]*)?(?:"|'|\))/g;
 
 module.exports = function (options) {
     var opt = {
@@ -19,6 +19,7 @@ module.exports = function (options) {
     var ignore = opt.ignore,
         maxsize = typeof +opt.maxsize === "number" ? +opt.maxsize : 1,
         pathrep = typeof opt.pathrep === "object" ? opt.pathrep : null;
+
     var _transform = function (file, encoding, done) {
         var str = String(file.contents);
         var p = file.path.substring(0, file.path.lastIndexOf("\\"));
