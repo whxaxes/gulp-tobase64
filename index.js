@@ -16,10 +16,20 @@ module.exports = function (options) {
         opt[k] = options[k];
     }
 
-    var i, ref;
     var ignore = opt.ignore,
         maxsize = typeof +opt.maxsize === "number" ? +opt.maxsize : 1,
         pathrep = typeof opt.pathrep === "object" ? opt.pathrep : null;
+
+    //将ignore参数转成正则
+    var type = Object.prototype.toString.call(ignore);
+    var RE;
+    if(type === "[object Array]"){
+        RE = new RegExp(formateRe(ignore.join("|")) , 'g');
+    }else if(type === "[object String]"){
+        RE = new RegExp(formateRe(ignore) , 'g');
+    }else if(type === "[object RegExp]"){
+        RE = ignore;
+    }
 
     var _transform = function (file, encoding, done) {
         var str = String(file.contents);
@@ -32,21 +42,9 @@ module.exports = function (options) {
             var imgPath = RegExp.$2;      //$2为路径内容
 
             //判断ignore的值并进行相应处理
-            if (ignore) {
-                if (typeof ignore === "string") {
-                    if (m.indexOf(ignore) >= 0) return m
-                } else if ('splice' in ignore) {
-                    ref = false;
-                    for (i = 0; i < ignore.length; i++) {
-                        if (typeof ignore[i] === "string" && m.indexOf(ignore[i]) >= 0) {
-                            ref = true;
-                            break;
-                        }
-                    }
-                    if (ref) return m;
-                } else if (ignore instanceof RegExp) {
-                    if (m.match(ignore)) return m;
-                }
+            if(RE && RE.test(m)){
+                RE.lastIndex = 0;   //重置RE索引
+                return m;
             }
 
             //如果是路由地址，则替换为相对地址，否则根据文件位置匹配出相应的绝对地址
@@ -80,4 +78,8 @@ module.exports = function (options) {
     };
 
     return through.obj(_transform)
+}
+
+function formateRe(str){
+    return str.replace(/\\|\.|\+/g , function(m){return '\\'+m});
 }
