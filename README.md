@@ -1,7 +1,7 @@
 # gulp-tobase64
 image to base64
 
-自用插件，可以将css、html中的图片转成base64格式
+A simple gulp plugin, used to transform image into base64 string.
 
 ## Install
 
@@ -31,13 +31,11 @@ image to base64
 ## API
 
 ### maxsize
-
-当图片文件大小小于该值时才会被编译成base64，默认值为1，单位为kb
+It will be compiled into base64 when the image size is less than this value, the default value is 1 and the unit is 'KB'
 
 ### ignore
-
-用于忽略匹配的图片文件路径，传入的参数可以为字符串，数组，或正则，例：'image'或['image','abc']或/\/abc\//g
+It's used to ignore files, it can be string,array or regular. <br>
+for example : `'image' , ['image','abc'] or /\/abc\//g`
 
 ### pathrep
-
-html中的img有可能用的是路由地址，比如'/public/images/XX.png'，该参数用于将路由地址转为相对地址以获取图片。格式如上demo，reg为正则，rep为要替换的路径
+It's used to transform relative path into absolute path.
