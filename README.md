@@ -34,7 +34,12 @@ It will be compiled into base64 when the image size is less than this value, the
 
 ### ignore
 It's used to ignore files, it can be string,array or regular. <br>
-`'image' , ['image','abc'] or /\/abc\//g`
+```
+'image' , ['image','abc'] or /\/abc\//g
+```
 
 ### pathrep
-It's used to transform file path into readable path like this : `/public/bizapp1007/image.png ==> ./public/image.png`
+It's used to transform file path into readable path like this :
+```
+/public/bizapp1007/image.png ==> ./public/image.png
+```
