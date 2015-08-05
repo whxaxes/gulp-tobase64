@@ -1,6 +1,6 @@
 # gulp-tobase64
 
-### A simple gulp plugin, used to transform image into base64 string.
+A simple gulp plugin, used to transform image into base64 string.
 
 ## Install
 
@@ -30,16 +30,16 @@
 ## API
 
 ### maxsize
-It will be compiled into base64 when the image size is less than this value, the default value is 1 and the unit is 'KB'
+The max size of images for compiling, the default value is 1 and the unit is 'KB'
 
 ### ignore
-It's used to ignore files, it can be string,array or regular. <br>
+Ignore files, it can be string, array or regular. <br>
 ```
 'image' , ['image','abc'] or /\/abc\//g
 ```
 
 ### pathrep
-It's used to transform file path into readable path like this :
+Transform file path into readable path like this :
 ```
 /public/bizapp1007/image.png ==> ./public/image.png
 ```
