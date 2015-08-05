@@ -1,7 +1,6 @@
 # gulp-tobase64
-image to base64
 
-A simple gulp plugin, used to transform image into base64 string.
+### A simple gulp plugin, used to transform image into base64 string.
 
 ## Install
 
@@ -12,7 +11,7 @@ A simple gulp plugin, used to transform image into base64 string.
     var tobase64 = require("gulp-tobase64");
     tobase64(options);
 
-### demo
+### Example
 
     var tobase64 = require("gulp-tobase64");
     gulp.task('build-html' , function(){
@@ -35,7 +34,7 @@ It will be compiled into base64 when the image size is less than this value, the
 
 ### ignore
 It's used to ignore files, it can be string,array or regular. <br>
-for example : `'image' , ['image','abc'] or /\/abc\//g`
+`'image' , ['image','abc'] or /\/abc\//g`
 
 ### pathrep
-It's used to transform relative path into absolute path.
+It's used to transform file path into readable path like this : `/public/bizapp1007/image.png ==> ./public/image.png`
