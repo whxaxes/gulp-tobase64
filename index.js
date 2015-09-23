@@ -33,7 +33,7 @@ module.exports = function (options) {
 
     var _transform = function (file, encoding, done) {
         var str = String(file.contents);
-        var p = file.path.substring(0, file.path.lastIndexOf("\\"));
+        var p = file.path.substring(0, file.path.lastIndexOf(path.sep));
         var count = 0;
         str = str.replace(URL_REG, function (m) {
             var prefix = RegExp.$1;       //$1为匹配的开头的"或'或(

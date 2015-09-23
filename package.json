@@ -1,6 +1,6 @@
 {
   "name": "gulp-tobase64",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "image to base64",
   "main": "index.js",
   "dependencies": {
