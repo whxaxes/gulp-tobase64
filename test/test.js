@@ -11,7 +11,7 @@ describe('/test/test.js', function(){
           reg:/\/public\//g
         }
       }))
-      .pipe(vfs.dest(__dirname + '/dist/'))
+      .pipe(vfs.dest(__dirname + '/dist/test1'))
       .on('end', function(){
         done();
       });
@@ -26,7 +26,7 @@ describe('/test/test.js', function(){
           rep:'./ref/'
         }
       }))
-      .pipe(vfs.dest(__dirname + '/dist/'))
+      .pipe(vfs.dest(__dirname + '/dist/test2'))
       .on('end', function(){
         done();
       });
@@ -37,7 +37,7 @@ describe('/test/test.js', function(){
       .pipe(tobase64({
         ignore:/img_2\.png/g
       }))
-      .pipe(vfs.dest(__dirname + '/dist/'))
+      .pipe(vfs.dest(__dirname + '/dist/test3'))
       .on('end', function(){
         done();
       });
