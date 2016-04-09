@@ -50,3 +50,6 @@ Transform file path into readable path like this :
 ```
 make test
 ```
+
+[npm-url]: https://www.npmjs.com/package/gulp-tobase64
+[npm-image]: http://img.shields.io/npm/v/django.svg
