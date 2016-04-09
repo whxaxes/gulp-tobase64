@@ -52,4 +52,4 @@ make test
 ```
 
 [npm-url]: https://www.npmjs.com/package/gulp-tobase64
-[npm-image]: http://img.shields.io/npm/v/django.svg
+[npm-image]: http://img.shields.io/npm/v/gulp-tobase64.svg
