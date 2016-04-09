@@ -1,6 +1,6 @@
 # gulp-tobase64
 
-[![NPM version][npm-image]][npm-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 A simple gulp plugin, used to transform image into base64 string.
 
@@ -51,5 +51,9 @@ Transform file path into readable path like this :
 make test
 ```
 
-[npm-url]: https://www.npmjs.com/package/gulp-tobase64
+[npm-url]: https://npmjs.org/package/gulp-tobase64
 [npm-image]: http://img.shields.io/npm/v/gulp-tobase64.svg
+[travis-url]: https://travis-ci.org/yanni4night/gulp-tobase64
+[travis-image]: http://img.shields.io/travis/yanni4night/gulp-tobase64.svg
+[coveralls-url]:https://coveralls.io/r/yanni4night/gulp-tobase64
+[coveralls-image]:https://coveralls.io/repos/yanni4night/gulp-tobase64/badge.png

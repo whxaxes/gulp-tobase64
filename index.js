@@ -27,7 +27,7 @@ module.exports = function(opt) {
   var pathrep = opt.pathrep || {};
 
   //将ignore参数转成正则
-  const type = Object.prototype.toString.call(ignore);
+  var type = Object.prototype.toString.call(ignore);
   var igReg;
   if (type === '[object Array]') {
     igReg = new RegExp(formatReg(ignore.join('|')), 'g');
@@ -46,7 +46,7 @@ module.exports = function(opt) {
    * @param done
    * @private
    */
-  const _transform = function(file, encoding, done) {
+  var _transform = function(file, encoding, done) {
     var str = String(file.contents);
     var p = file.path.substring(0, file.path.lastIndexOf(path.sep));
 
