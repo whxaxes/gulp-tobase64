@@ -1,8 +1,15 @@
+/**
+ * 将图片转换成base64格式的gulp组件
+ *
+ * author: wanghx
+ *
+ */
+
 'use strict';
-const through = require('through2');
-const path = require('path');
-const fs = require('fs');
-const URL_REG = /("|'|\()((?:\/?(?:[\w.-]|\.|\.\.)*\/)*?[\w-]*?\.(png|jpg|gif|bmp))(?:\?[\w=]*)?("|'|\))/g;
+var through = require('through2');
+var path = require('path');
+var fs = require('fs');
+var URL_REG = /("|'|\()((?:\/?(?:[\w.-]|\.|\.\.)*\/)*?[\w-]*?\.(png|jpg|gif|bmp))(?:\?[\w=]*)?("|'|\))/g;
 
 /**
  * @param opt
@@ -15,13 +22,13 @@ const URL_REG = /("|'|\()((?:\/?(?:[\w.-]|\.|\.\.)*\/)*?[\w-]*?\.(png|jpg|gif|bm
  */
 module.exports = function(opt) {
   opt = opt || {};
-  let ignore = opt.ignore;
-  let maxsize = +opt.maxsize || 1;
-  let pathrep = opt.pathrep || {};
+  var ignore = opt.ignore;
+  var maxsize = +opt.maxsize || 1;
+  var pathrep = opt.pathrep || {};
 
   //将ignore参数转成正则
   const type = Object.prototype.toString.call(ignore);
-  let igReg;
+  var igReg;
   if (type === '[object Array]') {
     igReg = new RegExp(formatReg(ignore.join('|')), 'g');
   } else if (type === '[object String]') {
@@ -40,14 +47,14 @@ module.exports = function(opt) {
    * @private
    */
   const _transform = function(file, encoding, done) {
-    let str = String(file.contents);
-    let p = file.path.substring(0, file.path.lastIndexOf(path.sep));
+    var str = String(file.contents);
+    var p = file.path.substring(0, file.path.lastIndexOf(path.sep));
 
     str = str.replace(URL_REG, function(m) {
-      let prefix = RegExp.$1;       //$1为匹配的开头的'或'或(
-      let suffix = RegExp.$4;       //$4为匹配的结尾的'或'或)
-      let imgkind = RegExp.$3;      //$3为匹配的图片类型
-      let imgPath = RegExp.$2;      //$2为路径内容
+      var prefix = RegExp.$1;       //$1为匹配的开头的'或'或(
+      var suffix = RegExp.$4;       //$4为匹配的结尾的'或'或)
+      var imgkind = RegExp.$3;      //$3为匹配的图片类型
+      var imgPath = RegExp.$2;      //$2为路径内容
 
       //判断ignore的值并进行相应处理
       if (igReg && m.match(igReg)) return m;
@@ -61,9 +68,9 @@ module.exports = function(opt) {
 
       //如果图片文件小于1kb则替换为base64格式
       if (fs.existsSync(imgPath) && (fs.statSync(imgPath).size / 1024) < maxsize) {
-        let source = fs.readFileSync(imgPath).toString('base64');
-        let imageSource = `data:image/${imgkind};base64,${source}`;
-        return `${prefix}${imageSource}${suffix}`;
+        var source = fs.readFileSync(imgPath).toString('base64');
+        var imageSource = 'data:image/' + imgkind + ';base64,' + source;
+        return prefix + imageSource + suffix;
       }
 
       return m;
@@ -75,7 +82,9 @@ module.exports = function(opt) {
   };
 
   function formatReg(str) {
-    return str.replace(/\\|\.|\+/g, m => '\\' + m);
+    return str.replace(/\\|\.|\+/g, function(m){
+      return '\\' + m
+    });
   }
 
   return through.obj(_transform)
