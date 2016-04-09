@@ -51,6 +51,9 @@ Transform file path into readable path like this :
 make test
 ```
 
+## License
+MIT
+
 [npm-url]: https://npmjs.org/package/gulp-tobase64
 [npm-image]: http://img.shields.io/npm/v/gulp-tobase64.svg
 [travis-url]: https://travis-ci.org/whxaxes/gulp-tobase64
