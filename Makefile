@@ -1,4 +1,4 @@
-SRC=./test/test.js
+SRC=./test/*.js
 
 ISTANBUL=./node_modules/.bin/istanbul
 _MOCHA=./node_modules/.bin/_mocha

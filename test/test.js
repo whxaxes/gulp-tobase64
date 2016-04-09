@@ -1,9 +1,10 @@
 var tobase64 = require('../');
 var vfs = require('vinyl-fs');
 var assert = require('assert');
+var fs = require('fs');
 
 describe('/test/test.js', function(){
-  it('should run without error when ignore is array', function(done){
+  it('should run without error when ignore is array and size limit is 1KB', function(done){
     vfs.src([__dirname + '/ref/test.html' , __dirname + '/ref/css/test.css'])
       .pipe(tobase64({
         ignore:['img_2.png'],
@@ -13,32 +14,51 @@ describe('/test/test.js', function(){
       }))
       .pipe(vfs.dest(__dirname + '/dist/test1'))
       .on('end', function(){
+        var matcher = getMatcher('test1');
+        assert(
+          (matcher[0] !== 'img_1.png') && matcher.length === 4,
+          'first img_1.png should not exit, matcher: ' + JSON.stringify(matcher || [])
+        );
+
         done();
       });
   });
 
-  it('should run without error when ignore is string', function(done){
+  it('should run without error when ignore is string and size limit is 2KB', function(done){
     vfs.src([__dirname + '/ref/test.html' , __dirname + '/ref/css/test.css'])
       .pipe(tobase64({
         ignore:'img_2.png',
+        maxsize: 2,
         pathrep:{
-          reg:/\/public\//g ,
-          rep:'./ref/'
+          reg:/\/public\//g,
+          rep:'./test/ref/'
         }
       }))
       .pipe(vfs.dest(__dirname + '/dist/test2'))
       .on('end', function(){
+        var matcher = getMatcher('test2');
+        assert(
+          (matcher.indexOf('img_1.png')===-1) && (matcher.indexOf('img_3.png')===-1),
+          'img_1.png and img_3.png should not exit, matcher: ' + JSON.stringify(matcher || [])
+        );
+
         done();
       });
   });
 
-  it('should run without error when ignore is regexp', function(done){
+  it('should run without error when ignore is regexp and no pathrep', function(done){
     vfs.src([__dirname + '/ref/test.html' , __dirname + '/ref/css/test.css'])
       .pipe(tobase64({
-        ignore:/img_2\.png/g
+        ignore:/img_1\.png/g
       }))
       .pipe(vfs.dest(__dirname + '/dist/test3'))
       .on('end', function(){
+        var matcher = getMatcher('test3');
+        assert(
+          (matcher.indexOf('img_2.png')===-1) && matcher.length === 4,
+          'img_2.png should not exit, matcher: ' + JSON.stringify(matcher || [])
+        );
+
         done();
       });
   });
@@ -46,9 +66,21 @@ describe('/test/test.js', function(){
   it('should run without error when no arguments', function(done){
     vfs.src([__dirname + '/ref/test.html' , __dirname + '/ref/css/test.css'])
       .pipe(tobase64())
-      .pipe(vfs.dest(__dirname + '/dist/'))
+      .pipe(vfs.dest(__dirname + '/dist/test4'))
       .on('end', function(){
+        var matcher = getMatcher('test4');
+        assert(
+          (matcher[0] !== 'img_1.png') && (matcher.indexOf('img_2.png')===-1) && matcher.length === 3,
+          'first img_1.png and img_2.png should not exit, matcher: ' + JSON.stringify(matcher || [])
+        );
+
         done();
       });
   });
 });
+
+function getMatcher(dir){
+  return fs.readFileSync(__dirname + '/dist/'+dir+'/test.html')
+    .toString()
+    .match(/img_\d\.png/g)
+}
