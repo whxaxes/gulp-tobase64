@@ -1,5 +1,7 @@
 # gulp-tobase64
 
+[![NPM version][npm-image]][npm-url]
+
 A simple gulp plugin, used to transform image into base64 string.
 
 ## Install
@@ -42,4 +44,9 @@ Ignore files, it can be string, array or regular. <br>
 Transform file path into readable path like this :
 ```
 /public/bizapp1007/image.png ==> ./public/image.png
+```
+
+## Running test
+```
+make test
 ```
