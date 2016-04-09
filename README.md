@@ -55,5 +55,5 @@ make test
 [npm-image]: http://img.shields.io/npm/v/gulp-tobase64.svg
 [travis-url]: https://travis-ci.org/whxaxes/gulp-tobase64
 [travis-image]: http://img.shields.io/travis/whxaxes/gulp-tobase64.svg
-[coveralls-url]:https://coveralls.io/r/whxaxes/gulp-tobase64
-[coveralls-image]:https://coveralls.io/repos/whxaxes/gulp-tobase64/badge.png
+[coveralls-url]: https://coveralls.io/r/whxaxes/gulp-tobase64
+[coveralls-image]: https://coveralls.io/repos/github/whxaxes/gulp-tobase64/badge.svg
