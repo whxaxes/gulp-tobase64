@@ -1,6 +1,8 @@
 var tobase64 = require('../');
 var vfs = require('vinyl-fs');
-var assert = require('assert');
+var chai = require('chai');
+var expect = chai.expect;
+var should = chai.should();
 var fs = require('fs');
 
 describe('/test/test.js', function(){
@@ -15,11 +17,7 @@ describe('/test/test.js', function(){
       .pipe(vfs.dest(__dirname + '/dist/test1'))
       .on('end', function(){
         var matcher = getMatcher('test1');
-        assert(
-          (matcher[0] !== 'img_1.png') && matcher.length === 4,
-          'first img_1.png should not exit, matcher: ' + JSON.stringify(matcher || [])
-        );
-
+        expect(matcher[0]).to.not.equals('img_1.png') && expect(matcher).to.have.lengthOf(4);
         done();
       });
   });
@@ -37,11 +35,7 @@ describe('/test/test.js', function(){
       .pipe(vfs.dest(__dirname + '/dist/test2'))
       .on('end', function(){
         var matcher = getMatcher('test2');
-        assert(
-          (matcher.indexOf('img_1.png')===-1) && (matcher.indexOf('img_3.png')===-1),
-          'img_1.png and img_3.png should not exit, matcher: ' + JSON.stringify(matcher || [])
-        );
-
+        expect(matcher).to.not.include('img_1.png', 'img_3.png');
         done();
       });
   });
@@ -54,11 +48,7 @@ describe('/test/test.js', function(){
       .pipe(vfs.dest(__dirname + '/dist/test3'))
       .on('end', function(){
         var matcher = getMatcher('test3');
-        assert(
-          (matcher.indexOf('img_2.png')===-1) && matcher.length === 4,
-          'img_2.png should not exit, matcher: ' + JSON.stringify(matcher || [])
-        );
-
+        expect(matcher).to.not.include('img_2.png') && expect(matcher).to.have.lengthOf(4);
         done();
       });
   });
@@ -69,11 +59,7 @@ describe('/test/test.js', function(){
       .pipe(vfs.dest(__dirname + '/dist/test4'))
       .on('end', function(){
         var matcher = getMatcher('test4');
-        assert(
-          (matcher[0] !== 'img_1.png') && (matcher.indexOf('img_2.png')===-1) && matcher.length === 3,
-          'first img_1.png and img_2.png should not exit, matcher: ' + JSON.stringify(matcher || [])
-        );
-
+        expect(matcher).to.not.include('img_2.png') && expect(matcher[0]).to.not.equals('img_1.png');
         done();
       });
   });
