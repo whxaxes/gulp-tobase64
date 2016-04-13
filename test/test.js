@@ -17,7 +17,8 @@ describe('/test/test.js', function(){
       .pipe(vfs.dest(__dirname + '/dist/test1'))
       .on('end', function(){
         var matcher = getMatcher('test1');
-        expect(matcher[0]).to.not.equals('img_1.png') && expect(matcher).to.have.lengthOf(4);
+        expect(matcher[0]).to.not.equals('img_1.png');
+        expect(matcher).to.have.lengthOf(4);
         done();
       });
   });
@@ -48,7 +49,8 @@ describe('/test/test.js', function(){
       .pipe(vfs.dest(__dirname + '/dist/test3'))
       .on('end', function(){
         var matcher = getMatcher('test3');
-        expect(matcher).to.not.include('img_2.png') && expect(matcher).to.have.lengthOf(4);
+        expect(matcher).to.not.include('img_2.png');
+        expect(matcher).to.have.lengthOf(4);
         done();
       });
   });
@@ -59,7 +61,9 @@ describe('/test/test.js', function(){
       .pipe(vfs.dest(__dirname + '/dist/test4'))
       .on('end', function(){
         var matcher = getMatcher('test4');
-        expect(matcher).to.not.include('img_2.png') && expect(matcher[0]).to.not.equals('img_1.png');
+        expect(matcher).to.not.include('img_2.png');
+        expect(matcher[0]).to.not.equals('img_1.png');
+        expect(matcher).to.have.lengthOf(3);
         done();
       });
   });
