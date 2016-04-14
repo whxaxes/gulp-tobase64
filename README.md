@@ -1,6 +1,8 @@
 # gulp-tobase64
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url]
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
 
 A simple gulp plugin, used to transform image into base64 string.
 
@@ -55,8 +57,8 @@ make test
 MIT
 
 [npm-url]: https://npmjs.org/package/gulp-tobase64
-[npm-image]: http://img.shields.io/npm/v/gulp-tobase64.svg
+[npm-image]: http://img.shields.io/npm/v/gulp-tobase64.svg?style=flat-square
 [travis-url]: https://travis-ci.org/whxaxes/gulp-tobase64
-[travis-image]: http://img.shields.io/travis/whxaxes/gulp-tobase64.svg
+[travis-image]: http://img.shields.io/travis/whxaxes/gulp-tobase64.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/whxaxes/gulp-tobase64
-[coveralls-image]: https://coveralls.io/repos/github/whxaxes/gulp-tobase64/badge.svg
+[coveralls-image]: https://coveralls.io/repos/github/whxaxes/gulp-tobase64/badge.svg?style=flat-square
