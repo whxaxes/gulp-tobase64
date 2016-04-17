@@ -7,29 +7,32 @@
 A simple gulp plugin, used to transform image into base64 string.
 
 ## Install
-
-    npm install gulp-tobase64
+```
+npm install gulp-tobase64
+```
 
 ## Usage
-
-    var tobase64 = require("gulp-tobase64");
-    tobase64(options);
+```javascript
+var tobase64 = require("gulp-tobase64");
+tobase64(options);
+```
 
 ### Example
-
-    var tobase64 = require("gulp-tobase64");
-    gulp.task('build-html' , function(){
-      return gulp.src("./html-init/**/*.html")
-          .pipe(tobase64({
-              maxsize:0.5,        
-              ignore:'image_loading.png',
-              pathrep: {
-                  reg:/\/public\/bizapp\d*\//g ,
-                  rep:'./public/'
-              }
-          }))
-          .pipe(gulp.dest("./html"))
-    });
+```javascript
+var tobase64 = require("gulp-tobase64");
+gulp.task('build-html' , function(){
+  return gulp.src("./html-init/**/*.html")
+      .pipe(tobase64({
+          maxsize:0.5,        
+          ignore:'image_loading.png',
+          pathrep: {
+              reg:/\/public\/bizapp\d*\//g ,
+              rep:'./public/'
+          }
+      }))
+      .pipe(gulp.dest("./html"))
+});
+```
 
 ## API
 
