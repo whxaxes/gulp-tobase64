@@ -50,11 +50,11 @@ module.exports = function(opt) {
     var str = String(file.contents);
     var p = file.path.substring(0, file.path.lastIndexOf(path.sep));
 
-    str = str.replace(URL_REG, function(m) {
-      var prefix = RegExp.$1;       //$1为匹配的开头的'或'或(
-      var suffix = RegExp.$4;       //$4为匹配的结尾的'或'或)
-      var imgkind = RegExp.$3;      //$3为匹配的图片类型
-      var imgPath = RegExp.$2;      //$2为路径内容
+    str = str.replace(URL_REG, function(m, p1, p2, p3, p4) {
+      var prefix = p1;       //$1为匹配的开头的'或'或(
+      var suffix = p4;       //$4为匹配的结尾的'或'或)
+      var imgkind = p3;      //$3为匹配的图片类型
+      var imgPath = p2;      //$2为路径内容
 
       //判断ignore的值并进行相应处理
       if (igReg && m.match(igReg)) return m;
